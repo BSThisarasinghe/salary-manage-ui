@@ -1,0 +1,1 @@
+module.exports.QR_BACKEND_URL = '';//'http://localhost:5004';

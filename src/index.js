@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import './assets/css/perfundo.with-icons.css';
+import './assets/css/styles.css';
+import 'antd/dist/antd.css';
+import 'ant-design-pro/dist/ant-design-pro.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
