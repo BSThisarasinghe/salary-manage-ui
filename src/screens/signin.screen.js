@@ -1,9 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
+import { useHistory } from "react-router-dom";
+import { postSignIn } from '../services';
 
 const SignIn = () => {
+
+  const history = useHistory();
+
   const onFinish = (values) => {
-    console.log('Success:', values);
+    let req = {
+      "email": values.email,
+      "password": values.password
+    }
+
+    postSignIn(req).then((response) => {
+      if(response.status === 200){
+        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('expireTime', response.data.expireTime);
+        localStorage.setItem('refreshToken', response.data.response.refreshToken);
+        history.push('/');
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -25,9 +44,9 @@ const SignIn = () => {
               <h1>Login</h1>
               <p className="text-muted"> Please enter your login and password!</p>
               <Form.Item
-                name="username"
-                placeholder="Username"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                name="email"
+                placeholder="Email"
+                rules={[{ required: true, message: 'Please input your email!' }]}
               >
                 <Input className="login__input" />
               </Form.Item>
@@ -42,7 +61,7 @@ const SignIn = () => {
               <Form.Item>
                 <Button className="login__btn" type="primary" htmlType="submit">
                   Submit
-        </Button>
+                </Button>
               </Form.Item>
             </Form>
           </div>

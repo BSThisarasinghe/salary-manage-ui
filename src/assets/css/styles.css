@@ -129,7 +129,7 @@ body {
   padding: 10px 10px !important;
   width: 250px !important;
   outline: none !important;
-  color: white !important;
+  color: #000 !important;
   border-radius: 24px !important;
   transition: 0.25s !important;
 }
