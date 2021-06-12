@@ -25,35 +25,6 @@ class SubRouter extends Component {
         }
     }
 
-    onPressLogout = () => {
-        confirmAlert({
-            message: "Are you sure you want to logout?",
-            buttons: [
-                {
-                    label: 'Yes',
-                    onClick: () => this.onConfirmLogout()
-                },
-                {
-                    label: 'No',
-                }
-            ]
-        });
-    }
-
-    onConfirmLogout = () => {
-        let clearState = new Promise(async (resolve, reject) => {
-            this.setState({
-                loading: true
-            }, async function () {
-                await localStorage.clear();
-            });
-            resolve(true);
-        });
-        clearState.then(() => {
-            this.props.keycloak.logout();
-        })
-    }
-
     render() {
         if (this.state.loading) {
             return (

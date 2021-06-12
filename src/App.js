@@ -14,10 +14,6 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const history = useHistory();
 
-  const onLogout = () => {
-    // this.state.keycloak.logout();
-  }
-
   const setAuth = () => {
     setLoading(true);
     let expireTime = localStorage.getItem("expireTime");

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { useHistory } from "react-router-dom";
 import { postSignIn } from '../services';
 
@@ -28,6 +28,7 @@ const SignIn = () => {
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
+    message.error('Oops, error occured while loggin in. Please try again');
   };
 
   return (

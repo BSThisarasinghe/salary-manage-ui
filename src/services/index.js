@@ -10,6 +10,14 @@ const postSignIn = async (req) => {
     })
 }
 
+const signOut = async () => {
+    return await axiosInstance({
+        method: `delete`,
+        url: `${Constants.API_URL}/users/signout`
+    })
+}
+
 export {
-    postSignIn
+    postSignIn,
+    signOut
 }

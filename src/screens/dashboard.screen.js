@@ -4,6 +4,7 @@ import { message, Spin, Space } from "antd";
 import { LayoutComponent } from "../components";
 
 const Dashboard = (props) => {
+    console.log(props);
     return (
         <LayoutComponent {...props}>
             <div>

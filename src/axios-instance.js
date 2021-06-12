@@ -1,15 +1,45 @@
 import axios from 'axios';
+import * as Constants from './constants';
 
 var axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use(
     config => {
-        const token = window.accessToken ? window.accessToken : 'token';
-        const isTokenExpired = window.isTokenExpired;
-        console.log("Token:::- " + token);
-        console.log("isTokenExpired:::- " + isTokenExpired);
-        config.headers['Authorization'] = 'Bearer ' + token;
-        return config;
+        let accessToken = localStorage.getItem("accessToken");
+        let expireTime = localStorage.getItem("expireTime");
+        let refreshToken = localStorage.getItem("refreshToken");
+
+        if (accessToken && (typeof expireTime !== undefined && new Date(expireTime) > new Date())) {
+            if (config.method !== 'OPTIONS') {
+                config.headers['Content-Type'] = 'application/json';
+                config.headers['Authorization'] = `bearer ${accessToken}`;
+                config.headers['Cache-Control'] = `no-cache`;
+                return config;
+            }
+        } else {
+            if (new Date(expireTime) > new Date()) {
+                axios({
+                    method: 'get',
+                    url: `${Constants.API_URL}/users/token`,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        "token": refreshToken
+                    }
+                }).then((response) => {
+                    accessToken = response.data.accessToken;
+                    localStorage.setItem('accessToken', accessToken);
+                    localStorage.setItem('expireTime', response.data.expireTime);
+                    config.headers['Content-Type'] = 'application/json';
+                    config.headers['Authorization'] = `bearer ${accessToken}`;
+                    config.headers['Cache-Control'] = `no-cache`;
+                    return config;
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+        }
     },
     error => {
         Promise.reject(error)
