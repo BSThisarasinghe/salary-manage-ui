@@ -9,9 +9,9 @@ import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-
-import Dashboard from './screens/dashboard.screen';
 import { Spinner, SideBar, HeaderComponent, FooterComponent, BreadcrumbComponent } from './components';
+import Dashboard from './screens/dashboard.screen';
+import SignIn from './screens/signin.screen';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -21,11 +21,8 @@ class SubRouter extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            logoutLoading: false,
+            loading: props.loading
         }
-    }
-
-    componentDidMount() {
     }
 
     onPressLogout = () => {
@@ -46,7 +43,7 @@ class SubRouter extends Component {
     onConfirmLogout = () => {
         let clearState = new Promise(async (resolve, reject) => {
             this.setState({
-                logoutLoading: true
+                loading: true
             }, async function () {
                 await localStorage.clear();
             });
@@ -57,8 +54,8 @@ class SubRouter extends Component {
         })
     }
 
-    renderRoutes() {
-        if (this.state.logoutLoading) {
+    render() {
+        if (this.state.loading) {
             return (
                 <div className="spinner_container">
                     <Spinner />
@@ -68,28 +65,10 @@ class SubRouter extends Component {
             return (
                 <>
                     <Route exact path="/" render={(props) => <Dashboard {...props} />} />
+                    <Route exact path="/signin" render={(props) => <SignIn {...props} />} />
                 </>
             )
         }
-    }
-
-    render() {
-        const { collapsed } = this.state;
-        return (
-            <Layout style={{ minHeight: '100vh' }}>
-                <SideBar />
-                <Layout className="site-layout">
-                    <HeaderComponent />
-                    <Content style={{ margin: '0 16px' }}>
-                        <BreadcrumbComponent />
-                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            {this.renderRoutes()}
-                        </div>
-                    </Content>
-                    <FooterComponent />
-                </Layout>
-            </Layout>
-        );
     }
 }
 

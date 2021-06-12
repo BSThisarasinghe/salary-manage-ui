@@ -14,10 +14,11 @@ const SignIn = () => {
     }
 
     postSignIn(req).then((response) => {
-      if(response.status === 200){
+      if (response.status === 200) {
         localStorage.setItem('accessToken', response.data.accessToken);
         localStorage.setItem('expireTime', response.data.expireTime);
         localStorage.setItem('refreshToken', response.data.response.refreshToken);
+        localStorage.setItem('authenticated', true);
         history.push('/');
       }
     }).catch((error) => {

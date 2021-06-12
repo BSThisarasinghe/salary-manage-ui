@@ -1,6 +1,6 @@
 import './App.css';
-import React, { Component } from 'react';
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Switch, BrowserRouter as Router, Route, useHistory } from "react-router-dom";
 import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
 import AccessDenied from './screens/access-denied.screen';
 import SubRouter from './sub-router';
@@ -10,31 +10,40 @@ import { Spinner } from './components';
 
 function App() {
 
-  const {
-    isLoading,
-    isAuthenticated,
-    error,
-    user,
-    loginWithRedirect,
-    logout,
-  } = useAuth0();
+  const [loading, setLoading] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
+  const history = useHistory();
 
   const onLogout = () => {
     // this.state.keycloak.logout();
   }
 
+  const setAuth = () => {
+    setLoading(true);
+    let expireTime = localStorage.getItem("expireTime");
+    if (typeof expireTime !== undefined && expireTime !== null) {
+      if (new Date(expireTime) < new Date()) {
+        setLoading(false);
+        setAuthenticated(false);
+      } else {
+        setLoading(false);
+        setAuthenticated(true);
+      }
+    } else {
+      setLoading(false);
+      setAuthenticated(false);
+    }
+  }
+
+  useEffect(() => {
+    setAuth();
+  }, [])
+
   return (
-    <Router>
-      <Auth0ProviderWithHistory>
-        <Switch>
-          {/* {isLoading && <div className="spinner_container">
-            <Spinner />
-          </div>}
-          {!isAuthenticated && <AccessDenied onLogout={onLogout} />} */}
-          <Route exact path="/signin" render={(props) => <SignIn {...props} />} />
-          {<SubRouter isLoading={isLoading} isAuthenticated={isAuthenticated} />}
-        </Switch>
-      </Auth0ProviderWithHistory>
+    <Router history={history}>
+      <Switch>
+        {<SubRouter loading={loading} authenticated={authenticated} />}
+      </Switch>
     </Router>
   );
 }
