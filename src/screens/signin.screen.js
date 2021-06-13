@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { postSignIn } from '../services';
 
 const SignIn = () => {
@@ -14,6 +14,7 @@ const SignIn = () => {
     }
 
     postSignIn(req).then((response) => {
+      console.log(response.data);
       if (response.status === 200) {
         localStorage.setItem('accessToken', response.data.accessToken);
         localStorage.setItem('expireTime', response.data.expireTime);
@@ -22,7 +23,11 @@ const SignIn = () => {
         history.push('/');
       }
     }).catch((error) => {
-      console.log(error);
+      if (error.response.status === 401) {
+        message.error('Username or password is incorrect.');
+      } else {
+        message.error('Oops, error occured while loggin in. Please try again');
+      }
     });
   };
 
@@ -47,22 +52,35 @@ const SignIn = () => {
               <p className="text-muted"> Please enter your login and password!</p>
               <Form.Item
                 name="email"
-                placeholder="Email"
-                rules={[{ required: true, message: 'Please input your email!' }]}
+                rules={[{
+                  required: true,
+                  message: 'Please input your email!'
+                }, {
+                  type: "email",
+                  message: 'Please input a valid email!'
+                }]}
               >
-                <Input className="login__input" />
+                <Input
+                  placeholder="Email"
+                  className="login__input"
+                />
               </Form.Item>
 
               <Form.Item
-                placeholder="Password"
                 name="password"
                 rules={[{ required: true, message: 'Please input your password!' }]}
               >
-                <Input.Password className="login__input" />
+                <Input.Password
+                  placeholder="Password"
+                  className="login__input"
+                />
               </Form.Item>
+              <div className="line__container">
+                Don't have an account? &nbsp;<Link to={'/signup'}>Create one</Link>
+              </div>
               <Form.Item>
                 <Button className="login__btn" type="primary" htmlType="submit">
-                  Submit
+                  Sign in
                 </Button>
               </Form.Item>
             </Form>

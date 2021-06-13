@@ -10,6 +10,14 @@ const postSignIn = async (req) => {
     });
 }
 
+const postSignUp = async (req) => {
+    return await axios({
+        method: `post`,
+        url: `${Constants.API_URL}/users/signup`,
+        data: req
+    });
+}
+
 const signOut = async () => {
     return await axiosInstance({
         method: `delete`,
@@ -17,7 +25,16 @@ const signOut = async () => {
     });
 }
 
+const checkEmailUnique = async (email) => {
+    return await axios({
+        method: `get`,
+        url: `${Constants.API_URL}/users/checkunique/${email}`
+    });
+}
+
 export {
     postSignIn,
-    signOut
+    postSignUp,
+    signOut,
+    checkEmailUnique
 }
