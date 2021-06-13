@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 import {
@@ -23,23 +23,20 @@ const SideBar = (props) => {
             <div className="logo" >
                 <img src={Salary} />
             </div>
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                <Menu.Item key="1" icon={<PieChartOutlined />}>
-                    Option 1
+            <Menu theme="dark" onClick={props.handleClick} defaultSelectedKeys={[props.current]} mode="inline">
+                <Menu.Item key="Dashboard" icon={<PieChartOutlined />}>
+                    Dashboard
+                    <Link to="/" />
                 </Menu.Item>
-                <Menu.Item key="2" icon={<DesktopOutlined />}>
-                    Option 2
+                <Menu.Item key="Months" icon={<DesktopOutlined />}>
+                    Months
+                    <Link to="/monthlist" />
                 </Menu.Item>
-                <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-                    <Menu.Item key="3">Tom</Menu.Item>
-                    <Menu.Item key="4">Bill</Menu.Item>
-                    <Menu.Item key="5">Alex</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-                    <Menu.Item key="6">Team 1</Menu.Item>
-                    <Menu.Item key="8">Team 2</Menu.Item>
-                </SubMenu>
-                <Menu.Item key="9" icon={<LogoutOutlined />}>
+                <Menu.Item key="Categories" icon={<DesktopOutlined />}>
+                    Categories
+                    <Link to="/categorylist" />
+                </Menu.Item>
+                <Menu.Item key="Logout" icon={<LogoutOutlined />}>
                     <a onClick={props.onLogout}>Logout</a>
                 </Menu.Item>
             </Menu>

@@ -38,7 +38,7 @@ function App() {
   return (
     <Router history={history}>
       <Switch>
-        {<SubRouter loading={loading} authenticated={authenticated} />}
+        <SubRouter loading={loading} authenticated={authenticated} />
       </Switch>
     </Router>
   );

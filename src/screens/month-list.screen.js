@@ -3,14 +3,14 @@ import SimpleReactValidator from 'simple-react-validator';
 import { message, Spin, Space } from "antd";
 import { LayoutComponent } from "../components";
 
-const Dashboard = (props) => {
+const MonthList = (props) => {
     return (
         <LayoutComponent {...props}>
             <div>
-                Dashboard
+                Months
             </div>
         </LayoutComponent>
     )
 }
 
-export default Dashboard;
+export default MonthList;

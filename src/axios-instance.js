@@ -9,6 +9,7 @@ axiosInstance.interceptors.request.use(
         let expireTime = localStorage.getItem("expireTime");
         let refreshToken = localStorage.getItem("refreshToken");
 
+        // debugger;
         if (accessToken && (typeof expireTime !== undefined && new Date(expireTime) > new Date())) {
             if (config.method !== 'OPTIONS') {
                 config.headers['Content-Type'] = 'application/json';
@@ -17,7 +18,7 @@ axiosInstance.interceptors.request.use(
                 return config;
             }
         } else {
-            if (new Date(expireTime) > new Date()) {
+            if (new Date(expireTime) < new Date()) {
                 axios({
                     method: 'get',
                     url: `${Constants.API_URL}/users/token`,

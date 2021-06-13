@@ -16,9 +16,11 @@ function LayoutComponent({ children }, props) {
     const handleRoutes = () => {
         let authenticated = props.authenticated;
         let auth = localStorage.getItem("authenticated");
-        if (typeof auth !== undefined && auth !== null) {
+        let expireTime = localStorage.getItem("expireTime");
+        if (typeof auth !== undefined && auth !== null && typeof expireTime !== undefined && expireTime !== null && new Date(expireTime) > new Date()) {
             authenticated = auth;
         }
+        
         if (!authenticated) {
             history.push('/signin')
         }
@@ -51,29 +53,46 @@ function LayoutComponent({ children }, props) {
         });
     }
 
+    let current;
+    let routerPath = window.location.pathname.split('/')[1];
+
+    const handleClick = (e) => {
+        console.log('click ', e.key);
+    }
+
+    if (routerPath === '') {
+        current = 'Dashboard';
+    } else if (routerPath === 'monthlist') {
+        current = 'Months';
+    } else if (routerPath === 'categorylist') {
+        current = 'Categories';
+    }
+
     useEffect(() => {
         handleRoutes();
     }, [])
 
     return (
-        <React.Fragment>
-            {loading ? <div className="spinner_container">
-                < Spinner />
-            </div > : <Layout style={{ minHeight: '100vh' }}>
-                <SideBar onLogout={onPressLogout} />
-                <Layout className="site-layout">
-                    <HeaderComponent />
-                    <Content style={{ margin: '0 16px' }}>
-                        <BreadcrumbComponent />
-                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            {children}
-                        </div>
-                    </Content>
-                    <FooterComponent />
-                </Layout>
+        <Layout style={{ minHeight: '100vh' }}>
+            <SideBar
+                onLogout={onPressLogout}
+                current={current}
+                handleClick={handleClick}
+            />
+            <Layout className="site-layout">
+                <HeaderComponent />
+                <Content style={{ margin: '0 16px' }}>
+                    <BreadcrumbComponent />
+                    <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+                        {loading ? <div className="spinner_container">
+                            < Spinner />
+                        </div > :
+                            children}
+                    </div>
+                </Content>
+                <FooterComponent />
             </Layout>
-            }
-        </React.Fragment>
+        </Layout>
     );
 }
 

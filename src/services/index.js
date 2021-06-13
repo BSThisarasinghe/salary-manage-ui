@@ -7,14 +7,14 @@ const postSignIn = async (req) => {
         method: `post`,
         url: `${Constants.API_URL}/users/signin`,
         data: req
-    })
+    });
 }
 
 const signOut = async () => {
     return await axiosInstance({
         method: `delete`,
         url: `${Constants.API_URL}/users/signout`
-    })
+    });
 }
 
 export {
