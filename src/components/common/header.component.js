@@ -4,12 +4,12 @@ import { Layout, Menu, Breadcrumb, Button } from 'antd';
 
 const { Header } = Layout;
 
-const HeaderComponent = () => {
+const HeaderComponent = ({ user }) => {
     return (
         <Header className="site-layout-background" style={{ padding: 0 }} >
-            {/* <Button key="1" type="primary">
-                Primary
-            </Button> */}
+            <div className="header__text__container">
+                {user !== null ? user.name : ''}
+            </div>
         </Header>
     )
 }

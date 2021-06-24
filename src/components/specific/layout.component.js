@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Switch, BrowserRouter as Router, Route, useHistory } from "react-router-dom";
-import { Layout, Menu, Breadcrumb, Button, message } from 'antd';
+import { Layout, Menu, Breadcrumb, Button, message, Skeleton } from 'antd';
 import { confirmAlert } from 'react-confirm-alert';
 import { Spinner, SideBar, HeaderComponent, FooterComponent, BreadcrumbComponent } from '../common';
-import { signOut } from '../../services';
+import { signOut, getUserProfile } from '../../services';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -11,6 +11,8 @@ const { SubMenu } = Menu;
 function LayoutComponent({ children }, props) {
 
     const [loading, setLoading] = useState(false);
+    const [shimmer, setShimmer] = useState(true);
+    const [user, setUser] = useState(null);
     const history = useHistory();
 
     const handleRoutes = () => {
@@ -20,7 +22,7 @@ function LayoutComponent({ children }, props) {
         if (typeof auth !== undefined && auth !== null && typeof expireTime !== undefined && expireTime !== null && new Date(expireTime) > new Date()) {
             authenticated = auth;
         }
-        
+
         if (!authenticated) {
             history.push('/signin')
         }
@@ -53,11 +55,23 @@ function LayoutComponent({ children }, props) {
         });
     }
 
+    const setUserProfile = () => {
+        getUserProfile().then((response) => {
+            if (response.status === 200) {
+                setUser(response.data);
+            }
+        }).catch((error) => {
+            console.log(error);
+            message.error('Oops, error occured while getting profile data. Please try again');
+        });
+    }
+
     let current;
     let routerPath = window.location.pathname.split('/')[1];
 
     const handleClick = (e) => {
         console.log('click ', e.key);
+        setShimmer(false);
     }
 
     if (routerPath === '') {
@@ -70,6 +84,8 @@ function LayoutComponent({ children }, props) {
 
     useEffect(() => {
         handleRoutes();
+        setUserProfile();
+        setShimmer(false);
     }, [])
 
     return (
@@ -80,9 +96,13 @@ function LayoutComponent({ children }, props) {
                 handleClick={handleClick}
             />
             <Layout className="site-layout">
-                <HeaderComponent />
+                <HeaderComponent
+                    user={user}
+                />
                 <Content style={{ margin: '0 16px' }}>
-                    <BreadcrumbComponent />
+                    <BreadcrumbComponent
+                        current={current}
+                    />
                     <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                         {loading ? <div className="spinner_container">
                             < Spinner />

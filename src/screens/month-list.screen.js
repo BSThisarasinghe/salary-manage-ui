@@ -5,11 +5,9 @@ import { LayoutComponent } from "../components";
 
 const MonthList = (props) => {
     return (
-        <LayoutComponent {...props}>
-            <div>
-                Months
-            </div>
-        </LayoutComponent>
+        <div>
+            Months
+        </div>
     )
 }
 

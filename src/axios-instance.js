@@ -20,7 +20,7 @@ axiosInstance.interceptors.request.use(
         } else {
             if (new Date(expireTime) < new Date()) {
                 axios({
-                    method: 'get',
+                    method: 'post',
                     url: `${Constants.API_URL}/users/token`,
                     headers: {
                         'Content-Type': 'application/json'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
-import { Spinner } from './components';
+import { Spinner, LayoutComponent } from './components';
 import Dashboard from './screens/dashboard.screen';
 import SignIn from './screens/signin.screen';
 import SignUp from './screens/signup.screen';
@@ -25,13 +25,11 @@ class SubRouter extends Component {
             );
         } else {
             return (
-                <>
+                <LayoutComponent {...this.props}>
                     <Route exact path="/" render={(props) => <Dashboard {...props} />} />
-                    <Route exact path="/signin" render={(props) => <SignIn {...props} />} />
-                    <Route exact path="/signup" render={(props) => <SignUp {...props} />} />
                     <Route exact path="/monthlist" render={(props) => <MonthList {...props} />} />
                     <Route exact path="/categorylist" render={(props) => <CategoryList {...props} />} />
-                </>
+                </LayoutComponent>
             )
         }
     }

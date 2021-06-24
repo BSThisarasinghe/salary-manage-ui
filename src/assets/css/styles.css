@@ -172,3 +172,10 @@ body {
 .error__text {
   color: red;
 }
+
+.header__text__container {
+  color: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}

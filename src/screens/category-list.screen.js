@@ -5,11 +5,9 @@ import { LayoutComponent } from "../components";
 
 const CategoryList = (props) => {
     return (
-        <LayoutComponent {...props}>
-            <div>
-                CategoryList
-            </div>
-        </LayoutComponent>
+        <div>
+            CategoryList
+        </div>
     )
 }
 

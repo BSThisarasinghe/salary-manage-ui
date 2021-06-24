@@ -32,9 +32,17 @@ const checkEmailUnique = async (email) => {
     });
 }
 
+const getUserProfile = async () => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/users/user`
+    });
+}
+
 export {
     postSignIn,
     postSignUp,
     signOut,
-    checkEmailUnique
+    checkEmailUnique,
+    getUserProfile
 }
