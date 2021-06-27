@@ -39,10 +39,27 @@ const getUserProfile = async () => {
     });
 }
 
+const getCategoryList = async () => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/categories/categorylist`
+    });
+}
+
+const postCategory = async (req) => {
+    return await axiosInstance({
+        method: `post`,
+        url: `${Constants.API_URL}/categories/category`,
+        data: req
+    });
+}
+
 export {
     postSignIn,
     postSignUp,
     signOut,
     checkEmailUnique,
-    getUserProfile
+    getUserProfile,
+    getCategoryList,
+    postCategory
 }

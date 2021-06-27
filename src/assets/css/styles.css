@@ -134,7 +134,7 @@ body {
   transition: 0.25s !important;
 }
 
-.ant-input {
+.login__input .ant-input {
   text-align: center;
 }
 
@@ -178,4 +178,29 @@ body {
   display: flex;
   justify-content: flex-end;
   padding-right: 20px;
+}
+
+.default__btn {
+  border: 0;
+  background-color: unset;
+}
+
+.default__btn:hover {
+  background-color: unset;
+}
+
+.default__btn:focus {
+  background-color: unset;
+}
+
+.screen__backgroound {
+  display: flex;
+  flex-direction: column;
+}
+
+.screen__backgroound > a {
+  margin-bottom: 20px;
+  display: flex;
+  align-self: flex-end;
+  align-items: center;
 }

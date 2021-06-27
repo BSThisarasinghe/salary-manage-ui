@@ -6,6 +6,8 @@ import SignIn from './screens/signin.screen';
 import SignUp from './screens/signup.screen';
 import MonthList from './screens/month-list.screen';
 import CategoryList from './screens/category-list.screen';
+import CategoryEdit from './screens/category-edit.screen';
+import CategoryAdd from './screens/categrory-add.screen';
 
 class SubRouter extends Component {
 
@@ -29,6 +31,8 @@ class SubRouter extends Component {
                     <Route exact path="/" render={(props) => <Dashboard {...props} />} />
                     <Route exact path="/monthlist" render={(props) => <MonthList {...props} />} />
                     <Route exact path="/categorylist" render={(props) => <CategoryList {...props} />} />
+                    <Route exact path="/categorylist/:id" render={(props) => <CategoryEdit {...props} />} />
+                    <Route exact path="/category" render={(props) => <CategoryAdd {...props} />} />
                 </LayoutComponent>
             )
         }
