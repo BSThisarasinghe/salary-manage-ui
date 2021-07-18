@@ -78,7 +78,7 @@ function LayoutComponent({ children }, props) {
         current = 'Dashboard';
     } else if (routerPath === 'monthlist') {
         current = 'Months';
-    } else if (routerPath === 'categorylist') {
+    } else if (routerPath === 'categorylist' || routerPath === 'category') {
         current = 'Categories';
     }
 

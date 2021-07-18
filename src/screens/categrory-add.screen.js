@@ -20,11 +20,6 @@ const CategoryAdd = () => {
         wrapperCol: { span: 8 },
     };
 
-    const onChangeName = (e) => {
-        setName(e.target.value);
-        console.log(name);
-    }
-
     const onAddCategory = (values) => {
         let req = {
             "name": values.name,
@@ -74,7 +69,7 @@ const CategoryAdd = () => {
                         placeholder="Category name"
                         className="form-control"
                         value={name}
-                        onChange={onChangeName}
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </Form.Item>
                 <label>Description</label>

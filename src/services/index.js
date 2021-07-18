@@ -54,6 +54,35 @@ const postCategory = async (req) => {
     });
 }
 
+const getCategory = async (id) => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/categories/category/${id}`
+    });
+}
+
+const putCategory = async (req, id) => {
+    return await axiosInstance({
+        method: `put`,
+        url: `${Constants.API_URL}/categories/category/${id}`,
+        data: req
+    });
+}
+
+const deleteCategory = async (id) => {
+    return await axiosInstance({
+        method: `delete`,
+        url: `${Constants.API_URL}/categories/category/${id}`
+    });
+}
+
+const getMonthList = async () => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/months/monthlist`
+    });
+}
+
 export {
     postSignIn,
     postSignUp,
@@ -61,5 +90,9 @@ export {
     checkEmailUnique,
     getUserProfile,
     getCategoryList,
-    postCategory
+    postCategory,
+    getCategory,
+    putCategory,
+    deleteCategory,
+    getMonthList
 }
