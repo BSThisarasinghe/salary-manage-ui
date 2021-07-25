@@ -64,7 +64,7 @@ const Dashboard = (props) => {
                         {Array.isArray(monthdetails) && monthdetails.length > 0 &&
                             <>
                                 <Link className="btn btn-primary" to={`/income/${monthdetails[0].id}`}>Add income</Link>&nbsp;&nbsp;
-                                <Link className="btn btn-secondary" to={'/expense'}>Add expense</Link>
+                                <Link className="btn btn-secondary" to={`/expense/${monthdetails[0].id}`}>Add expense</Link>
                             </>}
                     </Card>
                 </div>
@@ -75,7 +75,7 @@ const Dashboard = (props) => {
                         {Array.isArray(monthdetails) && monthdetails.length > 0 && Array.isArray(monthdetails[0].incomes) && monthdetails[0].incomes.map((value, index) => {
                             return (
                                 <>
-                                    <Link>{value.income}</Link>: {value.amount}
+                                    <Link to={`/income-edit/${value.id}`}>{value.income}</Link>: {value.amount}
                                     <br />
                                 </>
                             )
@@ -99,7 +99,7 @@ const Dashboard = (props) => {
                                         {Array.isArray(value.expenses) && value.expenses.map((value, index) => {
                                             return (
                                                 <tr>
-                                                    <td><input type="checkbox" checked={value.paid} /><Link>{value.expense}</Link></td>
+                                                    <td><input type="checkbox" checked={value.paid} /><Link to={`/expense-edit/${value.id}`}>{value.expense}</Link></td>
                                                     <td>{value.amount}</td>
                                                 </tr>
                                             )

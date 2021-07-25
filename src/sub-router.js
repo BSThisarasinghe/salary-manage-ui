@@ -11,6 +11,9 @@ import CategoryList from './screens/category-list.screen';
 import CategoryEdit from './screens/category-edit.screen';
 import CategoryAdd from './screens/categrory-add.screen';
 import IncomeAdd from './screens/income-add.screen';
+import IncomeEdit from './screens/income-edit.screen';
+import ExpenseAdd from './screens/expense-add.screen';
+import ExpenseEdit from './screens/expense-edit.screen';
 
 class SubRouter extends Component {
 
@@ -39,6 +42,9 @@ class SubRouter extends Component {
                     <Route exact path="/categorylist/:id" render={(props) => <CategoryEdit {...props} />} />
                     <Route exact path="/category" render={(props) => <CategoryAdd {...props} />} />
                     <Route exact path="/income/:id" render={(props) => <IncomeAdd {...props} />} />
+                    <Route exact path="/income-edit/:id" render={(props) => <IncomeEdit {...props} />} />
+                    <Route exact path="/expense/:id" render={(props) => <ExpenseAdd {...props} />} />
+                    <Route exact path="/expense-edit/:id" render={(props) => <ExpenseEdit {...props} />} />
                 </LayoutComponent>
             )
         }
