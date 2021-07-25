@@ -204,3 +204,12 @@ body {
   align-self: flex-end;
   align-items: center;
 }
+
+.dashboard__header__card {
+  height: 130px;
+}
+
+.button__container {
+  display: flex;
+  justify-content: flex-end;
+}

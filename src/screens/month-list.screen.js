@@ -3,7 +3,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import { Link, useHistory } from "react-router-dom";
 import { message, Spin, Space, Button, Tag } from "antd";
 import { confirmAlert } from 'react-confirm-alert';
-import { getMonthList, deleteCategory } from '../services';
+import { getMonthList, deleteMonth } from '../services';
 import { FormOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 
 const MonthList = (props) => {
@@ -25,9 +25,9 @@ const MonthList = (props) => {
     }
 
     const onConfirmDelete = (id) => {
-        deleteCategory(id).then((response) => {
+        deleteMonth(id).then((response) => {
             if (response.status === 200) {
-                message.success('Category deleted successfully');
+                message.success('Month deleted successfully');
                 setMonthList();
             }
         }).catch((error) => {
@@ -78,7 +78,7 @@ const MonthList = (props) => {
                                 <td>{value.month}</td>
                                 <td>{value.year}</td>
                                 <td>
-                                    <Link className="default__btn" to={`/categorylist/${value.id}`}><FormOutlined style={{ color: '#1890ff' }} /></Link>&nbsp;&nbsp;
+                                    <Link className="default__btn" to={`/monthlist/${value.id}`}><FormOutlined style={{ color: '#1890ff' }} /></Link>&nbsp;&nbsp;
                                     <Button className="default__btn" onClick={() => onClickDelete(value.id)}><DeleteOutlined style={{ color: 'red' }} /></Button>
                                 </td>
                             </tr>

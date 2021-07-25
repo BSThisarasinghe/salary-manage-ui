@@ -5,9 +5,12 @@ import Dashboard from './screens/dashboard.screen';
 import SignIn from './screens/signin.screen';
 import SignUp from './screens/signup.screen';
 import MonthList from './screens/month-list.screen';
+import MonthAdd from './screens/month-add.screen';
+import MonthEdit from './screens/month-edit.screen';
 import CategoryList from './screens/category-list.screen';
 import CategoryEdit from './screens/category-edit.screen';
 import CategoryAdd from './screens/categrory-add.screen';
+import IncomeAdd from './screens/income-add.screen';
 
 class SubRouter extends Component {
 
@@ -30,9 +33,12 @@ class SubRouter extends Component {
                 <LayoutComponent {...this.props}>
                     <Route exact path="/" render={(props) => <Dashboard {...props} />} />
                     <Route exact path="/monthlist" render={(props) => <MonthList {...props} />} />
+                    <Route exact path="/month" render={(props) => <MonthAdd {...props} />} />
+                    <Route exact path="/monthlist/:id" render={(props) => <MonthEdit {...props} />} />
                     <Route exact path="/categorylist" render={(props) => <CategoryList {...props} />} />
                     <Route exact path="/categorylist/:id" render={(props) => <CategoryEdit {...props} />} />
                     <Route exact path="/category" render={(props) => <CategoryAdd {...props} />} />
+                    <Route exact path="/income/:id" render={(props) => <IncomeAdd {...props} />} />
                 </LayoutComponent>
             )
         }

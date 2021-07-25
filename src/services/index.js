@@ -83,6 +83,118 @@ const getMonthList = async () => {
     });
 }
 
+const postMonth = async (req) => {
+    return await axiosInstance({
+        method: `post`,
+        url: `${Constants.API_URL}/months/month`,
+        data: req
+    });
+}
+
+const getMonth = async (id) => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/months/month/${id}`
+    });
+}
+
+const putMonth = async (req, id) => {
+    return await axiosInstance({
+        method: `put`,
+        url: `${Constants.API_URL}/months/month/${id}`,
+        data: req
+    });
+}
+
+const deleteMonth = async (id) => {
+    return await axiosInstance({
+        method: `delete`,
+        url: `${Constants.API_URL}/months/month/${id}`
+    });
+}
+
+const getIncomeList = async () => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/incomes/incomelist`
+    });
+}
+
+const postIncome = async (req) => {
+    return await axiosInstance({
+        method: `post`,
+        url: `${Constants.API_URL}/incomes/income`,
+        data: req
+    });
+}
+
+const getIncome = async (id) => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/incomes/income/${id}`
+    });
+}
+
+const putIncome = async (req, id) => {
+    return await axiosInstance({
+        method: `put`,
+        url: `${Constants.API_URL}/incomes/income/${id}`,
+        data: req
+    });
+}
+
+const deleteIncome = async (id) => {
+    return await axiosInstance({
+        method: `delete`,
+        url: `${Constants.API_URL}/incomes/income/${id}`
+    });
+}
+
+const getExpenseList = async () => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/expenses/expenselist`
+    });
+}
+
+const postExpense = async (req) => {
+    return await axiosInstance({
+        method: `post`,
+        url: `${Constants.API_URL}/expenses/expense`,
+        data: req
+    });
+}
+
+const getExpense = async (id) => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/expenses/expense/${id}`
+    });
+}
+
+const putExpense = async (req, id) => {
+    return await axiosInstance({
+        method: `put`,
+        url: `${Constants.API_URL}/expenses/expense/${id}`,
+        data: req
+    });
+}
+
+const deleteExpense = async (id) => {
+    return await axiosInstance({
+        method: `delete`,
+        url: `${Constants.API_URL}/expenses/expense/${id}`
+    });
+}
+
+const getMonthSummary = async (month_id) => {
+    return await axiosInstance({
+        method: `get`,
+        url: `${Constants.API_URL}/months/monthdetails/${month_id}`
+    });
+}
+
+
 export {
     postSignIn,
     postSignUp,
@@ -94,5 +206,20 @@ export {
     getCategory,
     putCategory,
     deleteCategory,
-    getMonthList
+    getMonthList,
+    postMonth,
+    getMonth,
+    putMonth,
+    deleteMonth,
+    getIncomeList,
+    postIncome,
+    getIncome,
+    putIncome,
+    deleteIncome,
+    getExpenseList,
+    postExpense,
+    getExpense,
+    putExpense,
+    deleteExpense,
+    getMonthSummary
 }
