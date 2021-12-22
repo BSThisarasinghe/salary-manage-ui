@@ -5,7 +5,7 @@ import { message, Spin, Card } from "antd";
 import { MonthSummary } from "../components";
 import { getMonthSummary } from "../services";
 
-const Dashboard = () => {
+const MonthSummaryDetails = () => {
 
     const [month, setMonth] = useState('');
     const [income, setIncome] = useState('');
@@ -27,7 +27,8 @@ const Dashboard = () => {
     }
 
     const setMonthSummary = () => {
-        getMonthSummary('LATEST').then((response) => {
+        const monthId = window.location.pathname.split('/')[2];
+        getMonthSummary(monthId).then((response) => {
             if (response.status === 200) {
                 if (response.data !== null && Array.isArray(response.data.data) && response.data.data.length > 0) {
                     console.log(response.data.data);
@@ -60,4 +61,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard;
+export default MonthSummaryDetails;
