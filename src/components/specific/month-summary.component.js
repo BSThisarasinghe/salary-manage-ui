@@ -37,7 +37,7 @@ const MonthSummary = (props) => {
                             return (
                                 <Link className="img__wrapper" to={`/income-edit/${value.id}`}>
                                     <div>
-                                        <span><img src={require('../../assets/images/business-and-finance.svg').default} /></span>
+                                        <span><img src={require('../../assets/images/business-and-finance.svg').default} className='img-icon' /></span>
                                         <div>
                                             <a>{value.income}</a>
                                             <p>{value.amount}</p>
