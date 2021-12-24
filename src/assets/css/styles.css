@@ -206,7 +206,7 @@ body {
 }
 
 .dashboard__header__card {
-  height: 130px;
+  height: 230px;
 }
 
 .button__container {
@@ -214,7 +214,47 @@ body {
   justify-content: flex-end;
 }
 
-.img-icon{
- width: 50px;
- height: 50px; 
+.img__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #d8d8d8;
+  border-radius: 5px;
+  height: 50px;
+  padding: 5px;
+}
+
+.img__wrapper div {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  width: 100%;
+  /* background-color: #1565c0; */
+  /* justify-content: center; */
+}
+
+.img__wrapper div span {
+  /* background-color: red; */
+  border: 1px solid #d8d8d8;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 22px;
+}
+
+.img__wrapper div div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 60%;
+  /* background-color: red; */
+}
+
+.img-icon {
+  width: 20px;
+  height: 20px;
 }

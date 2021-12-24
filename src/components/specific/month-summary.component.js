@@ -40,7 +40,7 @@ const MonthSummary = (props) => {
                                         <span><img src={require('../../assets/images/business-and-finance.svg').default} className='img-icon' /></span>
                                         <div>
                                             <a>{value.income}</a>
-                                            <p>{value.amount}</p>
+                                            <a>{value.amount}</a>
                                         </div>
                                     </div>
                                     <RightOutlined />
@@ -72,7 +72,7 @@ const MonthSummary = (props) => {
                         <div className="col-md-4">
                             <Card className="expense_card">
                                 <div className="expense_card__header">
-                                    <label>{value.name}</label>
+                                    <label>{value.name}</label> &nbsp;
                                     <small>{calculateIncomeSum(value.expenses)}</small>
                                 </div>
                                 <table className="table table-borderless">
